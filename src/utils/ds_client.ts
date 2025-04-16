@@ -257,7 +257,11 @@ export class DropshipperClient extends AESystemClient {
    * @link https://open.aliexpress.com/doc/api.htm#/api?cid=21038&path=aliexpress.trade.ds.order.get&methodType=GET/POST
    */
   async orderDetails(args: DS_Get_Order_Params) {
-    let response = await this.execute("aliexpress.trade.ds.order.get", args);
+    let response = await this.execute("aliexpress.ds.trade.order.get",
+       {
+        single_order_query: JSON.stringify(args),
+       },
+    );
 
     if (response.ok) {
       response.data.aliexpress_trade_ds_order_get_response =
